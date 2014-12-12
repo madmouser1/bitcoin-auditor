@@ -1,0 +1,179 @@
+<!doctype html>
+<html class="no-js" ng-app="bitcoinAuditorApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Bitcoin Auditor</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/material.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-controller="MainCtrl">
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">
+            <i class="fa fa-btc"></i>
+            Bitcoin Auditor
+          </a>
+        </div>
+        <!--<div class="navbar-collapse collapse navbar-right">
+          <ul class="nav navbar-nav">
+            <li>
+              <a></a>
+            </li>
+          </ul>-->
+        </div>
+      </div>
+    </nav>
+
+    <div class="container" ng-show="!hasToken">
+      <form class="form-horizontal">
+        <fieldset>
+          <div class="form-group">
+              <label for="token" class="col-sm-2 control-label">BitcoinCZ API Token</label>
+              <div class="col-sm-10 text-default">
+                <input type="text" class="form-control" id="token" placeholder="API Token" ng-model="token" />
+                <button class="btn btn-primary pull-right" ng-click="saveApiToken()" ng-disabled="token.length == 0">
+                  Go!
+                </button>
+              </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+
+    <div class="container" ng-if="loading">
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <h1>
+            <i class="fa fa-spin fa-spinner"></i>
+          </h1>
+          <h2>
+            Loading...
+          </h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" ng-show="data && hasToken">
+      <div class="row">
+        <div class="col-sm-6 text-center">
+          <div class="jumbotron">
+            <h1>
+              <span class="mdi-material-lightyellow">
+                <i class="fa fa-btc"></i>
+              </span>
+            </h1>
+            <h2>
+              <span ng-bind="reward.toFixed(8)">/<span>
+            </h2>
+            <h4>
+              <span ng-bind="thresholdPercent.toFixed(2)"></span>%
+              of the way to a payout
+            </h4>
+          </div>
+        </div>
+        <div class="col-sm-6 text-center">
+          <div class="jumbotron">
+            <h1>
+              <span ng-class="{'mdi-material-red': (alive == 0), 'mdi-material-lightyellow': (alive > 0 && alive < totalWorkers), 'mdi-material-lightgreen': (alive == totalWorkers)}">
+                <i class="fa fa-dashboard"></i>
+              </span>
+            </h1>
+            <h2>
+              <span ng-bind="data.hashrate"></span>
+              Mh/s
+            </h2>
+            <h4>
+              <span ng-bind="alive"></span>/<span ng-bind="totalWorkers"></span>
+              workers alive
+            </h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" >
+        <div class="col-sm-6" ng-repeat="(name, worker) in data.workers" ng-class="{'col-sm-offset-3': (totalWorkers % 2 == 1 && $last)}">
+          <div class="panel" ng-class="{'panel-danger': !worker.alive, 'panel-success': worker.alive}">
+            <div class="panel-heading">
+              <span class="panel-title">
+                <h4 class="pull-right">
+                  <span ng-bind="worker.hashrate"></span>
+                  Mh/s
+                </h4>
+                <h4 ng-bind="worker.name"></h4>
+              </span>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-sm-6">
+                  Shares:
+                  <span ng-bind="worker.shares">
+                </div>
+                <div class="col-sm-6 text-right">
+                  Score:
+                  <span ng-bind="worker.score.toFixed(2)">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--<script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>-->
+
+    <!-- build:js(.) scripts/oldieshim.js -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/bootstrap-material-design/dist/js/material.js"></script>
+    <script src="bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <!-- endbuild -->
+</body>
+</html>
