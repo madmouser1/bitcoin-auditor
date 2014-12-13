@@ -39,103 +39,105 @@
             Bitcoin Auditor
           </a>
         </div>
-        <!--<div class="navbar-collapse collapse navbar-right">
+        <div class="navbar-collapse collapse navbar-right">
           <ul class="nav navbar-nav">
             <li>
-              <a></a>
+              <a href="https://github.com/bhdouglass/bitcoin-auditor">About</a>
             </li>
-          </ul>-->
+          </ul>
         </div>
       </div>
     </nav>
 
-    <div class="container" ng-show="!hasToken">
-      <form class="form-horizontal">
-        <fieldset>
-          <div class="form-group">
-              <label for="token" class="col-sm-2 control-label">BitcoinCZ API Token</label>
-              <div class="col-sm-10 text-default">
-                <input type="text" class="form-control" id="token" placeholder="API Token" ng-model="token" />
-                <button class="btn btn-primary pull-right" ng-click="saveApiToken()" ng-disabled="token.length == 0">
-                  Go!
-                </button>
-              </div>
-          </div>
-        </fieldset>
-      </div>
-    </div>
-
-    <div class="container" ng-if="loading">
-      <div class="row">
-        <div class="col-sm-12 text-center">
-          <h1>
-            <i class="fa fa-spin fa-spinner"></i>
-          </h1>
-          <h2>
-            Loading...
-          </h2>
-        </div>
-      </div>
-    </div>
-
-    <div class="container" ng-show="data && hasToken">
-      <div class="row">
-        <div class="col-sm-6 text-center">
-          <div class="jumbotron">
-            <h1>
-              <span class="mdi-material-lightyellow">
-                <i class="fa fa-btc"></i>
-              </span>
-            </h1>
-            <h2>
-              <span ng-bind="reward.toFixed(8)">/<span>
-            </h2>
-            <h4>
-              <span ng-bind="thresholdPercent.toFixed(2)"></span>%
-              of the way to a payout
-            </h4>
-          </div>
-        </div>
-        <div class="col-sm-6 text-center">
-          <div class="jumbotron">
-            <h1>
-              <span ng-class="{'mdi-material-red': (alive == 0), 'mdi-material-lightyellow': (alive > 0 && alive < totalWorkers), 'mdi-material-lightgreen': (alive == totalWorkers)}">
-                <i class="fa fa-dashboard"></i>
-              </span>
-            </h1>
-            <h2>
-              <span ng-bind="data.hashrate"></span>
-              Mh/s
-            </h2>
-            <h4>
-              <span ng-bind="alive"></span>/<span ng-bind="totalWorkers"></span>
-              workers alive
-            </h4>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" >
-        <div class="col-sm-6" ng-repeat="(name, worker) in data.workers" ng-class="{'col-sm-offset-3': (totalWorkers % 2 == 1 && $last)}">
-          <div class="panel" ng-class="{'panel-danger': !worker.alive, 'panel-success': worker.alive}">
-            <div class="panel-heading">
-              <span class="panel-title">
-                <h4 class="pull-right">
-                  <span ng-bind="worker.hashrate"></span>
-                  Mh/s
-                </h4>
-                <h4 ng-bind="worker.name"></h4>
-              </span>
-            </div>
-            <div class="panel-body">
-              <div class="row">
-                <div class="col-sm-6">
-                  Shares:
-                  <span ng-bind="worker.shares">
+    <div style="display:none;" ng-style="appLoaded">
+      <div class="container" ng-show="!hasToken">
+        <form class="form-horizontal">
+          <fieldset>
+            <div class="form-group">
+                <label for="token" class="col-sm-2 control-label">BitcoinCZ API Token</label>
+                <div class="col-sm-10 text-default">
+                  <input type="text" class="form-control" id="token" placeholder="API Token" ng-model="token" />
+                  <button class="btn btn-primary pull-right" ng-click="saveApiToken()" ng-disabled="token.length == 0">
+                    Go!
+                  </button>
                 </div>
-                <div class="col-sm-6 text-right">
-                  Score:
-                  <span ng-bind="worker.score.toFixed(2)">
+            </div>
+          </fieldset>
+        </form>
+      </div>
+
+      <div class="container" ng-if="loading">
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <h1>
+              <i class="fa fa-spin fa-spinner"></i>
+            </h1>
+            <h2>
+              Loading...
+            </h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="container" ng-show="data && hasToken && !loading">
+        <div class="row">
+          <div class="col-sm-6 text-center">
+            <div class="jumbotron">
+              <h1>
+                <span class="mdi-material-lightyellow">
+                  <i class="fa fa-btc"></i>
+                </span>
+              </h1>
+              <h2>
+                <span ng-bind="reward.toFixed(8)">/<span>
+              </h2>
+              <h4>
+                <span ng-bind="thresholdPercent.toFixed(2)"></span>%
+                of the way to a payout
+              </h4>
+            </div>
+          </div>
+          <div class="col-sm-6 text-center">
+            <div class="jumbotron">
+              <h1>
+                <span ng-class="{'mdi-material-red': (alive == 0), 'mdi-material-lightyellow': (alive > 0 && alive < totalWorkers), 'mdi-material-lightgreen': (alive == totalWorkers)}">
+                  <i class="fa fa-dashboard"></i>
+                </span>
+              </h1>
+              <h2>
+                <span ng-bind="data.hashrate"></span>
+                Mh/s
+              </h2>
+              <h4>
+                <span ng-bind="alive"></span>/<span ng-bind="totalWorkers"></span>
+                workers alive
+              </h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" >
+          <div class="col-sm-6" ng-repeat="(name, worker) in data.workers" ng-class="{'col-sm-offset-3': (totalWorkers % 2 == 1 && $last)}">
+            <div class="panel" ng-class="{'panel-danger': !worker.alive, 'panel-success': worker.alive}">
+              <div class="panel-heading">
+                <span class="panel-title">
+                  <h4 class="pull-right">
+                    <span ng-bind="worker.hashrate"></span>
+                    Mh/s
+                  </h4>
+                  <h4 ng-bind="worker.name"></h4>
+                </span>
+              </div>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-sm-6">
+                    Shares:
+                    <span ng-bind="worker.shares">
+                  </div>
+                  <div class="col-sm-6 text-right">
+                    Score:
+                    <span ng-bind="worker.score.toFixed(2)">
+                  </div>
                 </div>
               </div>
             </div>

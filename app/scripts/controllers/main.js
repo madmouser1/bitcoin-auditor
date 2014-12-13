@@ -13,6 +13,7 @@ angular.module('bitcoinAuditorApp').controller('MainCtrl', function ($scope, $ht
   $scope.data = false;
   $scope.loading = false;
   $scope.hasToken = !!token;
+  $scope.appLoaded = {display: 'initial'};
 
   $scope.refresh = function() {
     //TODO: save api token to local storage
