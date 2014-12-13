@@ -4,6 +4,8 @@
 
 Simple AngularJS app for viewing bitcoin miner stats from mining.bitcoin.cz
 
+[Demo Site](http://bitcoin.bhdouglass.com/#/demo)
+
 ## Development ##
 
 * Install npm packages:
