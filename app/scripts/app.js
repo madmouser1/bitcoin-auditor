@@ -1,12 +1,10 @@
 'use strict';
 
-/**
- * @ngdoc overview
- * @name bitcoinAuditorApp
- * @description
- * # bitcoinAuditorApp
- *
- * Main module of the application.
- */
-angular
-  .module('bitcoinAuditorApp', []);
+angular.module('bitcoinAuditorApp', []);
+
+angular.module('bitcoinAuditorApp').config(function($locationProvider) {
+    $locationProvider.html5Mode({
+        enabled: false,
+        requireBase: false
+    });
+});

@@ -105,8 +105,7 @@
                 </span>
               </h1>
               <h2>
-                <span ng-bind="data.hashrate"></span>
-                Mh/s
+                <span ng-bind="data.hashrate | hash"></span>
               </h2>
               <h4>
                 <span ng-bind="alive"></span>/<span ng-bind="totalWorkers"></span>
@@ -122,8 +121,7 @@
               <div class="panel-heading">
                 <span class="panel-title">
                   <h4 class="pull-right">
-                    <span ng-bind="worker.hashrate"></span>
-                    Mh/s
+                    <span ng-bind="worker.hashrate | hash"></span>
                   </h4>
                   <h4 ng-bind="worker.name"></h4>
                 </span>
@@ -176,6 +174,7 @@
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/filters/hash.js"></script>
     <!-- endbuild -->
 </body>
 </html>
