@@ -41,6 +41,9 @@
         </div>
         <div class="navbar-collapse collapse navbar-right">
           <ul class="nav navbar-nav">
+            <li ng-class="{active: demoMode}">
+              <a href="#/demo">Demo</a>
+            </li>
             <li>
               <a href="https://github.com/bhdouglass/bitcoin-auditor">About</a>
             </li>
@@ -84,7 +87,7 @@
           <div class="col-sm-6 text-center">
             <div class="jumbotron">
               <h1>
-                <span class="mdi-material-lightyellow">
+                <span ng-class="{'mdi-material-red': (alive == 0), 'mdi-material-lightyellow': (alive > 0 && alive < totalWorkers), 'mdi-material-lightgreen': (alive == totalWorkers)}">
                   <i class="fa fa-btc"></i>
                 </span>
               </h1>
