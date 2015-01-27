@@ -49,54 +49,54 @@ angular.module('bitcoinAuditorApp').controller('MainCtrl', function ($scope, $ht
   function demoMode() {
     if ($location.absUrl().indexOf('demo') > -1) {
       var demoData = {
-        "username": "zeus",
-        "unconfirmed_reward": "52.00020113",
-        "rating": "none",
-        "nmc_send_threshold": "10.00000000",
-        "unconfirmed_nmc_reward": "0.00000000",
-        "estimated_reward": "67.01300180",
-        "hashrate": "4531",
-        "confirmed_nmc_reward": "0.00000000",
-        "send_threshold": "500.00000000",
-        "confirmed_reward": "325.00336802",
-        "workers": {
-          "zeus.hera": {
-            "last_share": 1418437334,
-            "score": "970.227112964",
-            "alive": true,
-            "shares": 32296,
-            "hashrate": 1030
+        'username': 'zeus',
+        'unconfirmed_reward': '52.00020113',
+        'rating': 'none',
+        'nmc_send_threshold': '10.00000000',
+        'unconfirmed_nmc_reward': '0.00000000',
+        'estimated_reward': '67.01300180',
+        'hashrate': '4531',
+        'confirmed_nmc_reward': '0.00000000',
+        'send_threshold': '500.00000000',
+        'confirmed_reward': '325.00336802',
+        'workers': {
+          'zeus.hera': {
+            'last_share': 1418437334,
+            'score': '970.227112964',
+            'alive': true,
+            'shares': 32296,
+            'hashrate': 1030
           },
-          "zeus.ares": {
-            "last_share": 1418437334,
-            "score": "870.227112964",
-            "alive": false,
-            "shares": 0,
-            "hashrate": 0
+          'zeus.ares': {
+            'last_share': 1418437334,
+            'score': '870.227112964',
+            'alive': false,
+            'shares': 0,
+            'hashrate': 0
           },
-          "zeus.apollo": {
-            "last_share": 1418437334,
-            "score": "770.227112964",
-            "alive": true,
-            "shares": 32296,
-            "hashrate": 1201
+          'zeus.apollo': {
+            'last_share': 1418437334,
+            'score': '770.227112964',
+            'alive': true,
+            'shares': 32296,
+            'hashrate': 1201
           },
-          "zeus.poseidon": {
-            "last_share": 1418437334,
-            "score": "670.227112964",
-            "alive": true,
-            "shares": 32296,
-            "hashrate": 2300
+          'zeus.poseidon': {
+            'last_share': 1418437334,
+            'score': '670.227112964',
+            'alive': true,
+            'shares': 32296,
+            'hashrate': 2300
           },
-          "zeus.athena": {
-            "last_share": 1418437334,
-            "score": "670.227112964",
-            "alive": false,
-            "shares": 0,
-            "hashrate": 0
+          'zeus.athena': {
+            'last_share': 1418437334,
+            'score': '670.227112964',
+            'alive': false,
+            'shares': 0,
+            'hashrate': 0
           },
         },
-        "wallet": "1K4vgFrh4rRRm9w53Azgf6E7f9ZbBjLMVa"
+        'wallet': '1K4vgFrh4rRRm9w53Azgf6E7f9ZbBjLMVa'
       };
 
       $scope.demoMode = true;

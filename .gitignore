@@ -1,8 +1,3 @@
-node_modules
-dist
-.tmp
-.sass-cache
-bower_components
-
-*.kdev4
+*.kdev*
 .kateconfig
+node_modules
