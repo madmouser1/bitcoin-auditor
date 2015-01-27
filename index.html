@@ -9,11 +9,15 @@
       *:focus {
         color: inherit !important;
       }
+
+      .ng-cloak {
+        display: none !important;
+      }
     </style>
 
     <link rel="shortcut icon" href="favicon.png">
   </head>
-  <body ng-controller="MainCtrl">
+  <body ng-controller="MainCtrl" class="ng-cloak">
     <nav class="navbar navbar-material-blue-grey" role="navigation">
       <div class="container">
         <div class="navbar-header">
