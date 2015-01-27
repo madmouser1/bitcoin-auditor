@@ -5,17 +5,16 @@
     <title>Bitcoin Auditor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.1.6/css/material.min.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.1.6/css/ripples.min.css" />
-
-    <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+      *:focus {
+        color: inherit !important;
+      }
+    </style>
 
     <link rel="shortcut icon" href="favicon.png">
   </head>
   <body ng-controller="MainCtrl">
-    <nav class="navbar navbar-default" role="navigation">
+    <nav class="navbar navbar-material-blue-grey" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -77,7 +76,7 @@
           <div class="col-sm-6 text-center">
             <div class="jumbotron">
               <h1>
-                <span ng-class="{'mdi-material-red': (alive == 0), 'mdi-material-lightyellow': (alive > 0 && alive < totalWorkers), 'mdi-material-lightgreen': (alive == totalWorkers)}">
+                <span ng-class="{'mdi-material-red': (alive == 0), 'mdi-material-yellow': (alive > 0 && alive < totalWorkers), 'mdi-material-green': (alive == totalWorkers)}">
                   <i class="fa fa-btc"></i>
                 </span>
               </h1>
@@ -93,7 +92,7 @@
           <div class="col-sm-6 text-center">
             <div class="jumbotron">
               <h1>
-                <span ng-class="{'mdi-material-red': (alive == 0), 'mdi-material-lightyellow': (alive > 0 && alive < totalWorkers), 'mdi-material-lightgreen': (alive == totalWorkers)}">
+                <span ng-class="{'mdi-material-red': (alive == 0), 'mdi-material-yellow': (alive > 0 && alive < totalWorkers), 'mdi-material-green': (alive == totalWorkers)}">
                   <i class="fa fa-dashboard"></i>
                 </span>
               </h1>
@@ -110,7 +109,7 @@
 
         <div class="row" >
           <div class="col-sm-6" ng-repeat="(name, worker) in data.workers" ng-class="{'col-sm-offset-3': (totalWorkers % 2 == 1 && $last)}">
-            <div class="panel" ng-class="{'panel-danger': !worker.alive, 'panel-success': worker.alive}">
+            <div class="panel" ng-class="{'panel-material-red': !worker.alive, 'panel-material-green': worker.alive}">
               <div class="panel-heading">
                 <span class="panel-title">
                   <h4 class="pull-right">
@@ -137,12 +136,7 @@
       </div>
     </div>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-
-    <script src="app/app.js"></script>
-    <script src="app/controllers/main.js"></script>
-    <script src="app/filters/hash.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lazyload/2.0.3/lazyload-min.js"></script>
+    <script src="assets/js/app.js?v=1.0"></script>
   </body>
 </html>
