@@ -45,7 +45,7 @@ LazyLoad.js([
       $scope.hasToken = true;
       $scope.loading = true;
 
-      $http.get('https://beta.mining.bitcoin.cz/accounts/profile/json/' + $scope.token).then(function(data) {
+      $http.get('https://mining.bitcoin.cz/accounts/profile/json/' + $scope.token).then(function(data) {
         refreshCallback(data.data);
       }, function(err) {
         console.log(err); //TODO error handling
